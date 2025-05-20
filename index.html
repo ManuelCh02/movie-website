@@ -3,14 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie static</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="./styles/main.css">
+
+    <title>Movie static</title>
 </head>
 <body>
-    <h1>Movie Static</h1>
+    <header id="header" class="header-container">
+        <h1>Movie Static</h1>
+
+        <form id="search-form">
+            <input type="text" class="search-form--inactive" placeholder="Deadpool">
+            <button class="search-form__button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </header>
+    
+    <main>
+        <section id="ultimate-trending-hero" class="trending-top">
+            <div class="trending-top__container-top">
+                <img src="https://www.themoviedb.org/t/p/w1280/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg" alt="The last of us season 2" class="img-top-trend">
+                <div class="container-top__hero-stats">
+                    <span>2025</span>
+                    <span>⭐ 9.2</span>
+                    <span>Details</span>
+                </div>
+                <button class="container-top__details-btn">Details</button>
+            </div>
+        </section>
+
+        <section id="trending-now">
+            <div>
+                <h2>Trending Now</h2>
+                <a href="#">See all</a>
+            </div>
+
+            <article>
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg" alt="Final Destination" width="150px">
+                </div>
+
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" width="150px">
+                </div>
+
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" width="150px">
+                </div>
+            </article>
+        </section>
+
+        <section id="latest">
+            <div>
+                <h2>Latest</h2>
+                <a href="#">See all</a>
+            </div>
+
+            <article>
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" width="150px">
+                </div>
+
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" width="150px">
+                </div>
+
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" width="150px">
+                </div>
+            </article>
+        </section>
+
+        <section id="upcoming">
+            <div>
+                <h2>Upcoming</h2>
+                <a href="#">See all</a>
+            </div>
+
+            <article>
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" alt="Lilo & Stitch" width="150px">
+                </div>
+
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg" alt="Sinners" width="150px">
+                </div>
+
+                <div class="movie-container">
+                    <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots" width="150px">
+                </div>
+            </article>
+        </section>
+    </main>
 
 
-    <script src="./src/sec.js"></script>
-    <script src="./src/main.js"></script>
+    <script src="./src/js/sec.js"></script>
+    <script src="./src/js/main.js"></script>
 </body>
 </html>

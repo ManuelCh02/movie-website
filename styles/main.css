@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --deep-blue: #0B192C;
+    --semi-deep-blue: #1E3E62;
+    --orange: #FF6500;
+
+    --deep-purple: #080D24;
+    --clear-purple: #252D4F;
+    --light-purple: #724CF8;
+
+
+    --font-family-titles: 'Roboto', sans-serif;
+    --font-family-text: 'Source Sans 3', sans-serif;
+    --font-weight-title1: 800;
+    --font-weight-title2: 700;
+    --font-weight-text1: 400;
+    --font-weight-text2: 500;
+
+    /* Mobile variables */
+    --page-title-font-mobile: 28px;
+    --body-text-mobile: 16px;
+    --secondary-text-mobile: 14px;
+
+    /* Desktop variables */
+    --page-title-font-desktop: 35px;
+    --body-text-desktop: 18px;
+    --secondary-text-desktop: 16px;
+
+    --border-radius: 12px;
+}
+
+html {
+    background: var(--deep-purple);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    font-family: var(--font-family-text);
+    font-weight: var(--font-weight-text1);
+    font-size: var(--body-text-mobile);
+    padding: 20px;
+}
+
+h1 {
+    font-weight: var(--font-weight-title1);
+}
+
+h2 {
+    font-weight: var(--font-weight-title2);
+    font-size: var(--page-title-font-mobile);
+}
+
+/****** Header ******/
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-form--inactive {
+    display: none;
+}
+
+.search-form__button {
+    padding: 12px;
+    background: var(--clear-purple);
+    outline: none;
+    border: none;
+    border-radius: var(--border-radius);
+}
+
+.fa-solid {
+    font-size: var(--body-text-mobile);
+    color: var(--white);
+}
+
+/****** Hero ******/
+.trending-top {
+    width: 100%;
+    position: relative;
+    margin: 24px 0;
+}
+
+.trending-top__container-top {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-top-trend {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: var(--border-radius);
+}
+
+.container-top__hero-stats {
+    position: absolute;
+    display: flex;
+
+    & span {
+        padding: 12px;
+        background: var(--clear-purple);
+        border-radius: var(--border-radius);
+    }
+}
+
+.container-top__details-btn {
+    top: 100%;
+    left: 50%;
+    position: absolute;
+}
