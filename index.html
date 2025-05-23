@@ -9,118 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="./styles/main.css">
-
-    <title>Movie static</title>
-</head>
-<body>
-    <header id="header" class="header-container">
-        <h1>Movie Static</h1>
-
-        <form id="search-form">
-            <input type="text" class="search-form--inactive" placeholder="Deadpool">
-            <button class="search-form__button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
-    </header>
-    
-    <main>
-        <section id="ultimate-trending-hero" class="trending-top">
-            <div class="trending-top__container-top">
-                <img src="https://www.themoviedb.org/t/p/w1280/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg" alt="The last of us season 2" class="img-top-trend">
-                <button class="container-top__details-btn">Details</button>
-            </div>
-        </section>
-
-        <div id="movies-ultra-section" class="main-movies-gallery">
-            <section id="trending-now" class="trending-now">
-                <div class="trending-now__title-container">
-                    <h2>Trending Now</h2>
-                    <a href="#">See all</a>
-                </div>
-
-                <article class="trending-now__movies-container">
-                    <div class="movies-container__gallery">
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg" alt="Final Destination">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie">
-                        </div>
-                    </div>    
-                </article>
-            </section>
-
-            <section id="latest" class="latest-movies">
-                <div class="latest-movies__title-container">
-                    <h2>Latest</h2>
-                    <a href="#">See all</a>
-                </div>
-
-                <article class="latest-movies__movies-container">
-                    <div class="movies-container__gallery">
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor">
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-            <section id="upcoming" class="upcoming-movies">
-                <div class="upcoming-moves__title-container">
-                    <h2>Upcoming</h2>
-                    <a href="#">See all</a>
-                </div>
-
-                <article class="upcoming-movies__container">
-                    <div class="movies-container__gallery">
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" alt="Lilo & Stitch">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg" alt="Sinners">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots">
-                        </div>
-
-                        <div class="movie-container">
-                            <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots">
-                        </div>
-                    </div>
-                </article>
-            </section>
-        </div>
-    </main>
-
-
     <script type="module" src="./src/js/navigation.js"></script>
     <script type="module" src="./src/js/views.js"></script>
     <script type="module" src="./src/js/sec.js"></script>
     <script type="module" src="./src/js/main.js"></script>
+
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/movie-details.css">
+
+    <title>Movie static</title>
+</head>
+<body>
+    <div id="app"></div>
 </body>
 </html>
