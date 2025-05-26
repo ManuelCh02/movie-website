@@ -60,10 +60,6 @@ body {
     height: 100%;
 }
 
-.header-details {
-    
-}
-
 .header-details__container {
     padding: var(--general-padding);
     display: flex;

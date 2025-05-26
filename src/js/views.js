@@ -1,8 +1,9 @@
 // Here's where we'll render all views dynamically
 export function homePage() {
-    const homePage = document.createElement('section');
-    homePage.innerHTML = `
-     <header id="header" class="header-container">
+    const homePage = document.createElement('div');
+    homePage.innerHTML = 
+    `
+        <header id="header" class="header-container">
             <h1>Movie Static</h1>
 
             <form id="search-form">
@@ -25,25 +26,25 @@ export function homePage() {
                 <section id="trending-now" class="trending-now">
                     <div class="trending-now__title-container">
                         <h2>Trending Now</h2>
-                        <a href="#">See all</a>
+                        <a href="#" class="trending-now-see-all">See all</a>
                     </div>
 
                     <article class="trending-now__movies-container">
                         <div class="movies-container__gallery">
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg" alt="Final Destination">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg" alt="Final Destination" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
                             </div>
                         </div>    
                     </article>
@@ -52,25 +53,25 @@ export function homePage() {
                 <section id="latest" class="latest-movies">
                     <div class="latest-movies__title-container">
                         <h2>Latest</h2>
-                        <a href="#">See all</a>
+                        <a href="#" class="latest-see-all">See all</a>
                     </div>
 
                     <article class="latest-movies__movies-container">
                         <div class="movies-container__gallery">
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" class="movie-img">
                             </div>
                         </div>
                     </article>
@@ -79,25 +80,25 @@ export function homePage() {
                 <section id="upcoming" class="upcoming-movies">
                     <div class="upcoming-moves__title-container">
                         <h2>Upcoming</h2>
-                        <a href="#">See all</a>
+                        <a href="#" class="upcoming-see-all">See all</a>
                     </div>
 
                     <article class="upcoming-movies__container">
                         <div class="movies-container__gallery">
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" alt="Lilo & Stitch">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" alt="Lilo & Stitch" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg" alt="Sinners">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg" alt="Sinners" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots" class="movie-img">
                             </div>
 
                             <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots">
+                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots" class="movie-img">
                             </div>
                         </div>
                     </article>
@@ -110,8 +111,8 @@ export function homePage() {
 }
 
 export function movieDetails() {
-    const body = document.createElement('section');
-    body.innerHTML = 
+    const movieDetail = document.createElement('div');
+    movieDetail.innerHTML = 
     `
     <header class="header-details">
         <div class="header-details__container">
@@ -148,5 +149,173 @@ export function movieDetails() {
     </main>
     `;
 
-    return body
+    return movieDetail
+}
+
+export function seeAllTrending() {
+    const movieTrending = document.createElement('div');
+    movieTrending.innerHTML = 
+    `
+    <header class="header-details">
+        <div class="header-details__container">
+            <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
+            <h3>Trending Now</h3>
+            <div></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="gallery">
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+        </section>
+    </main>
+    `;
+
+    return movieTrending
+}
+
+export function seAllLatest() {
+    const movieLatest = document.createElement('div');
+    movieLatest.innerHTML = 
+    `
+    <header class="header-details">
+        <div class="header-details__container">
+            <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
+            <h3>Latests Movies</h3>
+            <div></div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="gallery">
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+        </section>
+    </main>
+    `;
+
+    return movieLatest
+}
+
+export function seeAllUpcoming() {
+    const movieUpcoming = document.createElement('div');
+    movieUpcoming.innerHTML = 
+    `
+    <header class="header-details">
+        <div class="header-details__container">
+            <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
+            <h3>Upcoming Movies</h3>
+            <div></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="gallery">
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+
+            <div class="gallery-container">
+                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" class="movie-img">
+            </div>
+        </section>
+    </main>
+    `;
+
+    return movieUpcoming
 }

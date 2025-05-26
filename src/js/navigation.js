@@ -1,6 +1,9 @@
 // Here's where the logic of singly linked list data structure will work
 import { homePage } from "./views.js"
 import { movieDetails } from "./views.js"
+import { seeAllTrending } from "./views.js"
+import { seAllLatest } from "./views.js"
+import { seeAllUpcoming } from "./views.js"
 
 const appParent = document.getElementById('app');
 
@@ -36,22 +39,56 @@ class Stack {
         this.length++
         return this
     }
+
+    pop() {
+        const pointer = this.top
+        this.top = pointer.next
+        this.length--
+        return this
+    }
 }
 
 const myStack = new Stack();
-myStack.push(homePage());
 
-console.log(myStack.peek())
-console.log(typeof myStack.peek())
+if(!myStack.length) {
+    myStack.push(homePage());
+    appParent.appendChild(myStack.peek().value);
+}
 
-appParent.appendChild(myStack.peek().value);
+document.body.addEventListener('click', (e) => {
+    if(e.target.matches('.container-top__details-btn')) {
+        updateAppContent(movieDetails());
+    }
 
+    if(e.target.matches('.container__return-button') || e.target.matches('.fa-less-than')) {
+        returnAppContent();
+    }
 
-const detailBtn = document.querySelector('.container-top__details-btn');
-const body = document.querySelector('body');
+    if(e.target.matches('.trending-now-see-all')) {
+        updateAppContent(seeAllTrending());
+    }
 
-detailBtn.addEventListener('click', () => {
-    const movieDetail = movieDetails();
-    appParent.innerHTML = ``;
-    appParent.appendChild(movieDetail);
+    if(e.target.matches('.latest-see-all')) {
+        updateAppContent(seAllLatest());
+    }
+
+    if(e.target.matches('.upcoming-see-all')) {
+        updateAppContent(seeAllUpcoming());
+    }
+
+    if(e.target.matches('.movie-img')) {
+        updateAppContent(movieDetails())
+    }
 })
+
+function updateAppContent(nodeContent) {
+    myStack.push(nodeContent);
+    appParent.innerHTML = ''
+    appParent.appendChild(myStack.peek().value);
+}
+
+function returnAppContent() {
+    myStack.pop();
+    appParent.innerHTML = '';
+    appParent.appendChild(myStack.peek().value);
+}
