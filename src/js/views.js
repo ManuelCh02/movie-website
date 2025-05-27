@@ -1,5 +1,10 @@
 // Here's where we'll render all views dynamically
-export function homePage() {
+import { getMostTrending } from "./main.js";
+import { createTrendingList } from "./main.js";
+
+export async function homePage() {
+    const posterPath = await getMostTrending();
+    createTrendingList()
     const homePage = document.createElement('div');
     homePage.innerHTML = 
     `
@@ -17,7 +22,7 @@ export function homePage() {
         <main>
             <section id="ultimate-trending-hero" class="trending-top">
                 <div class="trending-top__container-top">
-                    <img src="https://www.themoviedb.org/t/p/w1280/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg" alt="The last of us season 2" class="img-top-trend">
+                    <img src="https://image.tmdb.org/t/p/w440_and_h660_face${posterPath}" class="img-top-trend">
                     <button class="container-top__details-btn">Details</button>
                 </div>
             </section>
@@ -30,49 +35,21 @@ export function homePage() {
                     </div>
 
                     <article class="trending-now__movies-container">
-                        <div class="movies-container__gallery">
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg" alt="Final Destination" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
-                            </div>
+                        <div class="movies-container__gallery trending-img-container">
+                            
                         </div>    
                     </article>
                 </section>
 
                 <section id="latest" class="latest-movies">
                     <div class="latest-movies__title-container">
-                        <h2>Latest</h2>
+                        <h2>Now Playing</h2>
                         <a href="#" class="latest-see-all">See all</a>
                     </div>
 
                     <article class="latest-movies__movies-container">
-                        <div class="movies-container__gallery">
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" class="movie-img">
-                            </div>
+                        <div class="movies-container__gallery nowPlaying-img-container">
+                            
                         </div>
                     </article>
                 </section>
@@ -84,22 +61,8 @@ export function homePage() {
                     </div>
 
                     <article class="upcoming-movies__container">
-                        <div class="movies-container__gallery">
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/mIKfKo2uDk3itzAPYIcSeYr4KtF.jpg" alt="Lilo & Stitch" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg" alt="Sinners" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/asDqvkE66EegtKJJXIRhBJPxscr.jpg" alt="Love, Death & Robots" class="movie-img">
-                            </div>
+                        <div class="movies-container__gallery upcoming-img-container">
+                            
                         </div>
                     </article>
                 </section>

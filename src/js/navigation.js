@@ -4,6 +4,7 @@ import { movieDetails } from "./views.js"
 import { seeAllTrending } from "./views.js"
 import { seAllLatest } from "./views.js"
 import { seeAllUpcoming } from "./views.js"
+import { searchMovieById } from "./main.js"
 
 const appParent = document.getElementById('app');
 
@@ -50,10 +51,16 @@ class Stack {
 
 const myStack = new Stack();
 
-if(!myStack.length) {
-    myStack.push(homePage());
+async function loadHomePage() {
+    const initialLoadingPage = await homePage()
+
+    if(!myStack.length) {
+    myStack.push(initialLoadingPage);
     appParent.appendChild(myStack.peek().value);
+    }
 }
+
+loadHomePage()
 
 document.body.addEventListener('click', (e) => {
     if(e.target.matches('.container-top__details-btn')) {
@@ -78,6 +85,9 @@ document.body.addEventListener('click', (e) => {
 
     if(e.target.matches('.movie-img')) {
         updateAppContent(movieDetails())
+        const movieImg = e.target;
+        const getMovieId = movieImg.id;
+        searchMovieById(getMovieId);
     }
 })
 
