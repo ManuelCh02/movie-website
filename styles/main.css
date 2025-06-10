@@ -198,3 +198,12 @@ button {
 .main-movies-gallery section:not(:first-child) {
     margin-top: inherit;
 }
+
+/****** Footer ******/
+footer {
+    margin-top: 48px;
+}
+
+footer span {
+    color: inherit;
+}
