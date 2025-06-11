@@ -22,7 +22,7 @@ export function homePage() {
                 </div>
             </section>
 
-            <div id="movies-ultra-section" class="main-movies-gallery">
+            <div id="trending-preview" class="main-movies-gallery">
                 <section id="trending-now" class="trending-now">
                     <div class="trending-now__title-container">
                         <h2>Trending Now</h2>
@@ -30,22 +30,8 @@ export function homePage() {
                     </div>
 
                     <article class="trending-now__movies-container">
-                        <div class="movies-container__gallery">
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg" alt="Final Destination" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
-                            </div>
+                        <div class="movies-container__gallery trending-now__gallery">
+                            
                         </div>    
                     </article>
                 </section>
