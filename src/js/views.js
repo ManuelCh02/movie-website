@@ -36,29 +36,15 @@ export function homePage() {
                     </article>
                 </section>
 
-                <section id="latest" class="latest-movies">
-                    <div class="latest-movies__title-container">
-                        <h2>Latest</h2>
-                        <a href="#" class="latest-see-all">See all</a>
+                <section id="categories-preview" class="categories">
+                    <div class="categories__title-container">
+                        <h2>Categories</h2>
+                        <a href="#" class="categories-see-all">See all</a>
                     </div>
 
-                    <article class="latest-movies__movies-container">
-                        <div class="movies-container__gallery">
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="A minecraft movie" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Mission:Impossible the final reckoning" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" class="movie-img">
-                            </div>
-
-                            <div class="movie-container">
-                                <img src="https://media.themoviedb.org/t/p/w440_and_h660_face/khZqmwHQicTYoS7Flreb9EddFZC.jpg" alt="Andor" class="movie-img">
-                            </div>
+                    <article class="categories__movies-container">
+                        <div class="movies-container__gallery categories-gallery">
+                            
                         </div>
                     </article>
                 </section>

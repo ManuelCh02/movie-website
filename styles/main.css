@@ -87,13 +87,13 @@ button {
 }
 
 .trending-now,
-.latest-movies,
+.categories,
 .upcoming-movies {
     width: 100%;
 }
 
 .trending-now__title-container,
-.latest-movies__title-container,
+.categories__title-container,
 .upcoming-moves__title-container {
     width: 100%;
     display: flex;
@@ -107,7 +107,7 @@ button {
 }
 
 .trending-now__movies-container, 
-.latest-movies__movies-container,
+.categories__movies-container,
 .upcoming-movies__container {
     width: 100%;
     height: 200px;
@@ -188,6 +188,24 @@ button {
     border-radius: var(--border-radius);
     cursor: pointer;
     font-size: var(--body-text-mobile);
+}
+
+/******* Categories Gallery ******/
+.movie-container--category {
+    position: relative;
+    background: var(--deep-blue);
+    display: flex;
+    align-items: center;
+    width: 133.32px;
+    height: 100%;
+    gap: 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-align: center;
+} 
+
+.movie-container--category h3 {
+    width: 100%;
 }
 
 /****** Movies gallery ultra container ******/
