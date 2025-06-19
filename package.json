@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ManuelCh02/movie-website/issues"
   },
-  "homepage": "https://github.com/ManuelCh02/movie-website#readme"
+  "homepage": "https://github.com/ManuelCh02/movie-website#readme",
+  "dependencies": {
+    "axios": "^1.10.0"
+  }
 }
