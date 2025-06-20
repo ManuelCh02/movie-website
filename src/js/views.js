@@ -291,3 +291,11 @@ export function seeAllUpcoming() {
 
     return movieUpcoming
 }
+
+export const sections = {
+    allHeaders: document.querySelectorAll('#header'),
+    allMainElements: document.querySelectorAll('#main-element'),
+    homePageHeader: document.querySelector('#header'),
+    // mainHomePage: document.querySelector('#main-homePage'),
+    homePageDetails: document.querySelector('.header-details'),
+}

@@ -4,7 +4,7 @@ const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {
         'Content-type': 'application/json;charset=utf-8',
-        'Authorization': API_KEY,
+        'Authorization': `Bearer ${API_KEY}`,
     },
 });
 
@@ -16,7 +16,7 @@ const options = {
     }
 }
 
-async function getTrendingMoviesPreview() {
+export async function getTrendingMoviesPreview() {
     const { data } = await api('trending/movie/day', options);
     
     const movies = data.results;
@@ -36,7 +36,7 @@ async function getTrendingMoviesPreview() {
     })
 }
 
-async function getCategoriesPreview() {
+export async function getCategoriesPreview() {
     const { data } = await api('genre/movie/list');
     
     const categories = data.genres;
@@ -56,5 +56,31 @@ async function getCategoriesPreview() {
     })
 }
 
-getTrendingMoviesPreview();
-getCategoriesPreview();
+const formButton = document.querySelector('.search-form__button');
+const formInput = document.querySelector('.form-input');
+
+console.log(formButton, formInput)
+
+formButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const isVisible = formInput.classList.contains('search-form--active');
+
+    if(isVisible) {
+        if(formInput.value.trim() === '') {
+            formInput.classList.remove('search-form--active');
+            formInput.classList.add('search-form--inactive');
+        }
+    } else {
+        formInput.classList.remove('search-form--inactive');
+        formInput.classList.add('search-form--active');
+        formInput.focus();
+    }
+})
+
+formInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && formInput.value.trim() === '') {
+        formInput.classList.remove('search-form--active');
+        formInput.classList.add('search-form--inactive');
+    }
+})

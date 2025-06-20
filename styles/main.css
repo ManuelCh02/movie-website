@@ -59,7 +59,7 @@ body {
     height: 100%;
 }
 
-html, body, main {
+html, body, .main-homePage {
     overflow-x: hidden;
 }
 
@@ -140,6 +140,17 @@ button {
     display: none;
 }
 
+.search-form--active {
+    display: inline-block;
+}
+
+.form-input {
+    outline: none;
+    padding: 12px;
+    font-size: var(--body-text-mobile);
+    font-family: var(--font-family-text);
+}
+
 .search-form__button {
     padding: 12px;
     background: var(--clear-purple);
@@ -215,4 +226,10 @@ button {
 
 .main-movies-gallery section:not(:first-child) {
     margin-top: inherit;
+}
+
+
+/******* Navigation *******/
+.inactive {
+    display: none;
 }
