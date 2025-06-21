@@ -173,6 +173,18 @@ function movieDetailsPage() {
 
 function searchPage() {
     console.log('SEARCH!')
+
+    sections.allHeaders.forEach((header) => {
+        if(!header.classList.contains('header-search')) {
+            header.classList.add('inactive');
+        }
+    })
+
+    sections.allMainElements.forEach((main) => {
+        if(!main.classList.contains('main-search')) {
+            main.classList.add('inactive');
+        }
+    })
 }
 
 function trendsPage() {

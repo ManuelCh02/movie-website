@@ -134,6 +134,11 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
+}
+
+.search-form {
+    display: flex;
 }
 
 .search-form--inactive {
@@ -145,10 +150,16 @@ button {
 }
 
 .form-input {
+    width: auto;
     outline: none;
     padding: 12px;
     font-size: var(--body-text-mobile);
     font-family: var(--font-family-text);
+    background: var(--clear-purple);
+    outline: none;
+    border: none;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    color: inherit;
 }
 
 .search-form__button {
@@ -157,6 +168,10 @@ button {
     outline: none;
     border: none;
     border-radius: var(--border-radius);
+}
+
+.search-form_button--active {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .fa-solid {

@@ -59,24 +59,34 @@ export async function getCategoriesPreview() {
 const formButton = document.querySelector('.search-form__button');
 const formInput = document.querySelector('.form-input');
 
-console.log(formButton, formInput)
+const formButtonSearch = document.querySelector('.search-form__button-searchPage');
+const formInputSearch = document.querySelector('.form-input-search');
 
-formButton.addEventListener('click', (e) => {
-    e.preventDefault();
+function showSearchBar(e, input) {
+    e.preventDefault(e);
 
-    const isVisible = formInput.classList.contains('search-form--active');
+    const isVisible = input.classList.contains('search-form--active');
 
     if(isVisible) {
-        if(formInput.value.trim() === '') {
-            formInput.classList.remove('search-form--active');
-            formInput.classList.add('search-form--inactive');
+        if(input.value.trim() === '') {
+            input.classList.remove('search-form--active');
+            input.classList.add('search-form--inactive');
+            e.target.classList.remove('search-form_button--active');
         }
     } else {
-        formInput.classList.remove('search-form--inactive');
-        formInput.classList.add('search-form--active');
-        formInput.focus();
+        input.classList.remove('search-form--inactive');
+        input.classList.add('search-form--active');
+        input.focus();
+        e.target.classList.add('search-form_button--active');
     }
-})
+
+    if(input.classList.contains('form-input-search')) {
+        input.placeholder = 'Wolverine';
+    }
+}
+
+formButton.addEventListener('click', (e) => showSearchBar(e, formInput));
+formButtonSearch.addEventListener('click', (e) => showSearchBar(e, formInputSearch));
 
 formInput.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && formInput.value.trim() === '') {
