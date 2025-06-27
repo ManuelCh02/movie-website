@@ -20,9 +20,11 @@ export async function getTrendingMoviesPreview() {
     const { data } = await api('trending/movie/day', options);
     
     const movies = data.results;
-    movies.forEach(movie => {
-        const trendingPreviewMoviesContainer = document.querySelector('#trending-preview .trending-now__gallery');
+    const trendingPreviewMoviesContainer = document.querySelector('#trending-preview .trending-now__gallery');
+    
+    trendingPreviewMoviesContainer.innerHTML = '';
 
+    movies.forEach(movie => {
         const movieContainer = document.createElement('div');
         movieContainer.classList.add('movie-container');
 
@@ -40,9 +42,11 @@ export async function getCategoriesPreview() {
     const { data } = await api('genre/movie/list');
     
     const categories = data.genres;
-    categories.forEach(category => {
-        const previewCategoriesContainer = document.querySelector('#categories-preview .categories-gallery');
+    const previewCategoriesContainer = document.querySelector('#categories-preview .categories-gallery');
 
+    previewCategoriesContainer.innerHTML = '';
+
+    categories.forEach(category => {
         const categoryContainer = document.createElement('div');
         categoryContainer.classList.add('movie-container--category');
 
@@ -51,8 +55,34 @@ export async function getCategoriesPreview() {
         categoryTitle.id = category.id;
         categoryTitle.textContent = category.name;
 
+        categoryContainer.addEventListener('click', () => {
+            location.hash = `#category=${category.id}-${category.name}`;
+        })
+
         categoryContainer.appendChild(categoryTitle);
         previewCategoriesContainer.appendChild(categoryContainer);
+    })
+}
+
+export async function getMoviesByCategory(id) {
+    const { data } = await api(`discover/movie?with_genres=${id}`, options);
+    
+    const categories = data.results;
+    const categoryPreviewMoviesContainer = document.querySelector('#category-preview .category__gallery');
+    
+    categoryPreviewMoviesContainer.innerHTML = '';
+
+    categories.forEach(category => {
+        const movieContainer = document.createElement('div');
+        movieContainer.classList.add('gallery-container');
+
+        const movieImg = document.createElement('img');
+        movieImg.classList.add('movie-img');
+        movieImg.alt = `${category.title}`;
+        movieImg.src= `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}`;
+
+        movieContainer.appendChild(movieImg);
+        categoryPreviewMoviesContainer.appendChild(movieContainer);
     })
 }
 
@@ -62,35 +92,22 @@ const formInput = document.querySelector('.form-input');
 const formButtonSearch = document.querySelector('.search-form__button-searchPage');
 const formInputSearch = document.querySelector('.form-input-search');
 
-function showSearchBar(e, input) {
-    e.preventDefault(e);
+const seeAllTrending = document.querySelector('.trending-now-see-all');
+const arrowButton = document.querySelectorAll('.container__return-button');
 
-    const isVisible = input.classList.contains('search-form--active');
-
-    if(isVisible) {
-        if(input.value.trim() === '') {
-            input.classList.remove('search-form--active');
-            input.classList.add('search-form--inactive');
-            e.target.classList.remove('search-form_button--active');
-        }
-    } else {
-        input.classList.remove('search-form--inactive');
-        input.classList.add('search-form--active');
-        input.focus();
-        e.target.classList.add('search-form_button--active');
+formButton.addEventListener('click', () => {
+    if(formInput.value.trim !== '') {
+        location.hash = `#search=${formInput.value}`;
     }
+})
 
-    if(input.classList.contains('form-input-search')) {
-        input.placeholder = 'Wolverine';
-    }
-}
+seeAllTrending.addEventListener('click', (e) => {
+    e.preventDefault();
+    location.hash = '#trends';
+})
 
-formButton.addEventListener('click', (e) => showSearchBar(e, formInput));
-formButtonSearch.addEventListener('click', (e) => showSearchBar(e, formInputSearch));
-
-formInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && formInput.value.trim() === '') {
-        formInput.classList.remove('search-form--active');
-        formInput.classList.add('search-form--inactive');
-    }
+arrowButton.forEach(arrow => {
+    arrow.addEventListener('click', () => {
+        location.hash = '';
+    })
 })

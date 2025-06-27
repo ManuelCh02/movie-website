@@ -95,6 +95,7 @@
 
 import { getTrendingMoviesPreview } from "./main.js";
 import { getCategoriesPreview } from "./main.js";
+import { getMoviesByCategory } from "./main.js";
 import { sections } from './views.js'
 
 window.addEventListener('DOMContentLoaded', navigator, false);
@@ -153,6 +154,17 @@ function categoriesPage() {
             main.classList.add('inactive');
         }
     })
+
+    window.scrollTo(0, 0);
+
+    const categoryTitle = document.querySelector('.category-title');
+
+    const [_, categoryData] = location.hash.split('=');
+    const [categoryId, categoryName] = categoryData.split('-');
+
+    categoryTitle.innerHTML = categoryName;
+
+    getMoviesByCategory(categoryId);
 }
 
 function movieDetailsPage() {
