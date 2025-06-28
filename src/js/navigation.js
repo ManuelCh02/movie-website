@@ -136,6 +136,8 @@ function homePage() {
         }
     })
 
+    window.scrollTo(0, 0);
+
     getTrendingMoviesPreview();
     getCategoriesPreview();
 }
@@ -181,6 +183,8 @@ function movieDetailsPage() {
             main.classList.add('inactive');
         }
     })
+
+    window.scrollTo(0, 0);
 }
 
 function searchPage() {
@@ -197,6 +201,8 @@ function searchPage() {
             main.classList.add('inactive');
         }
     })
+
+    window.scrollTo(0, 0);
 }
 
 function trendsPage() {
@@ -213,4 +219,6 @@ function trendsPage() {
             main.classList.add('inactive');
         }
     })
+
+    window.scrollTo(0, 0);
 }
