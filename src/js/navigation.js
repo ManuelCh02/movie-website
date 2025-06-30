@@ -96,7 +96,9 @@
 import { getTrendingMoviesPreview } from "./main.js";
 import { getCategoriesPreview } from "./main.js";
 import { getMoviesByCategory } from "./main.js";
-import { sections } from './views.js'
+import { getMoviesBySearch } from "./main.js";
+import { getTrendingMovies } from "./main.js";
+import { sections } from './views.js';
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('haschange', navigator, false);
@@ -115,7 +117,9 @@ function navigator() {
     } else {
         homePage();
     }
-    location.hash
+    location.hash;
+
+    window.scrollTo(0, 0);
 }
 
 function homePage() {
@@ -136,10 +140,10 @@ function homePage() {
         }
     })
 
-    window.scrollTo(0, 0);
-
     getTrendingMoviesPreview();
     getCategoriesPreview();
+
+    window.scrollTo(0, 0);
 }
 
 function categoriesPage() {
@@ -157,8 +161,6 @@ function categoriesPage() {
         }
     })
 
-    window.scrollTo(0, 0);
-
     const categoryTitle = document.querySelector('.category-title');
 
     const [_, categoryData] = location.hash.split('=');
@@ -167,6 +169,8 @@ function categoriesPage() {
     categoryTitle.innerHTML = categoryName;
 
     getMoviesByCategory(categoryId);
+
+    window.scrollTo(0, 0);
 }
 
 function movieDetailsPage() {
@@ -202,6 +206,10 @@ function searchPage() {
         }
     })
 
+    const [_, query] = location.hash.split('=');
+    
+    getMoviesBySearch(query);
+
     window.scrollTo(0, 0);
 }
 
@@ -219,6 +227,8 @@ function trendsPage() {
             main.classList.add('inactive');
         }
     })
+
+    getTrendingMovies()
 
     window.scrollTo(0, 0);
 }

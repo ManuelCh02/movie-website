@@ -59,6 +59,9 @@ function createMovies(movies, container) {
             case container.classList.contains('category__gallery'):
                 movieContainer.classList.add('gallery-container');
                 break;
+            case container.classList.contains('trends__gallery'):
+                movieContainer.classList.add('gallery-container');
+                break;
         }
     })
 }
@@ -88,21 +91,6 @@ export async function getTrendingMoviesPreview() {
     const trendingPreviewMoviesContainer = document.querySelector('#trending-preview .trending-now__gallery');
     
     createMovies(movies, trendingPreviewMoviesContainer);
-
-    // trendingPreviewMoviesContainer.innerHTML = '';
-
-    // movies.forEach(movie => {
-    //     const movieContainer = document.createElement('div');
-    //     movieContainer.classList.add('movie-container');
-
-    //     const movieImg = document.createElement('img');
-    //     movieImg.classList.add('movie-img');
-    //     movieImg.alt = `${movie.title}`;
-    //     movieImg.src= `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`;
-
-    //     movieContainer.appendChild(movieImg);
-    //     trendingPreviewMoviesContainer.appendChild(movieContainer);
-    // })
 }
 
 export async function getCategoriesPreview() {
@@ -112,25 +100,6 @@ export async function getCategoriesPreview() {
     const previewCategoriesContainer = document.querySelector('#categories-preview .categories-gallery');
 
     createMovies(categories, previewCategoriesContainer);
-
-    // previewCategoriesContainer.innerHTML = '';
-
-    // categories.forEach(category => {
-    //     const categoryContainer = document.createElement('div');
-    //     categoryContainer.classList.add('movie-container--category');
-
-    //     const categoryTitle = document.createElement('h3');
-    //     categoryTitle.classList.add('category-title');
-    //     categoryTitle.id = category.id;
-    //     categoryTitle.textContent = category.name;
-
-    //     categoryContainer.addEventListener('click', () => {
-    //         location.hash = `#category=${category.id}-${category.name}`;
-    //     })
-
-    //     categoryContainer.appendChild(categoryTitle);
-    //     previewCategoriesContainer.appendChild(categoryContainer);
-    // })
 }
 
 export async function getMoviesByCategory(id) {
@@ -140,6 +109,27 @@ export async function getMoviesByCategory(id) {
     const categoryPreviewMoviesContainer = document.querySelector('#category-preview .category__gallery');
     
     createCategories(categories, categoryPreviewMoviesContainer); 
+}
+
+export async function getMoviesBySearch(query) {
+    const { data } = await api(`search/movie?query=${query}`, options);
+    
+    const categories = data.results;
+    const categoryPreviewMoviesContainer = document.querySelector('#query-preview .query__gallery');
+    const searchPageTitle = document.querySelector('.header-search .searchPage-title');
+
+    searchPageTitle.textContent = decodeURIComponent(query);
+
+    createCategories(categories, categoryPreviewMoviesContainer); 
+}
+
+export async function getTrendingMovies() {
+    const { data } = await api('trending/movie/day', options);
+    
+    const movies = data.results;
+    const trendsMovieContainer = document.querySelector('#trends-preview .trends__gallery');
+    
+    createMovies(movies, trendsMovieContainer);
 }
 
 // DOM Events
@@ -158,6 +148,12 @@ formButton.addEventListener('click', () => {
     }
 })
 
+formButtonSearch.addEventListener('click', () => {
+    if(formInputSearch.value.trim !== '') {
+        location.hash = `#search=${formInputSearch.value}`;
+    }
+})
+
 seeAllTrending.addEventListener('click', (e) => {
     e.preventDefault();
     location.hash = '#trends';
@@ -165,6 +161,7 @@ seeAllTrending.addEventListener('click', (e) => {
 
 arrowButton.forEach(arrow => {
     arrow.addEventListener('click', () => {
-        location.hash = '';
+        location.hash = window.history.back();
     })
 })
+
