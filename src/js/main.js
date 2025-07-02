@@ -22,15 +22,30 @@ function createMovies(movies, container) {
     container.innerHTML = '';
 
     movies.forEach(movie => {
-        const movieContainer = document.createElement('div');
-
         if(!container.classList.contains('categories-gallery')) {
+            const movieContainer = document.createElement('div');
             const movieImg = document.createElement('img');
+            movieContainer.classList.add('gallery-container');
+
+            movieContainer.addEventListener('click', () => {
+                location.hash = `#movie=${movie.id}`;
+            })
+
             movieImg.classList.add('movie-img');
             movieImg.alt = `${movie.title}`;
             movieImg.src= `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`;
 
             movieContainer.appendChild(movieImg);
+
+            if (container.classList.contains('trending-now__gallery')) {
+                movieContainer.classList.add('movie-container');
+            } else if (
+                container.classList.contains('category__gallery') ||
+                container.classList.contains('trends__gallery')
+            ) {
+                movieContainer.classList.add('gallery-container');
+            }
+
             container.appendChild(movieContainer);
         } else {
             const categoryContainer = document.createElement('div');
@@ -47,21 +62,6 @@ function createMovies(movies, container) {
 
             categoryContainer.appendChild(categoryTitle);
             container.appendChild(categoryContainer);
-        }
-
-        switch(container) {
-            case container.classList.contains('trending-now__gallery'):
-                movieContainer.classList.add('movie-container');
-                break;
-            case container.classList.contains('categories-gallery'):
-                categoryContainer.classList.add('movie-container--category');
-                break;
-            case container.classList.contains('category__gallery'):
-                movieContainer.classList.add('gallery-container');
-                break;
-            case container.classList.contains('trends__gallery'):
-                movieContainer.classList.add('gallery-container');
-                break;
         }
     })
 }
@@ -120,7 +120,7 @@ export async function getMoviesBySearch(query) {
 
     searchPageTitle.textContent = decodeURIComponent(query);
 
-    createCategories(categories, categoryPreviewMoviesContainer); 
+    createMovies(categories, categoryPreviewMoviesContainer); 
 }
 
 export async function getTrendingMovies() {
@@ -130,6 +130,43 @@ export async function getTrendingMovies() {
     const trendsMovieContainer = document.querySelector('#trends-preview .trends__gallery');
     
     createMovies(movies, trendsMovieContainer);
+}
+
+export async function getMovieById(id) {
+    const { data } = await api(`movie/${id}`, options);
+    
+    // const movieDetail = document.querySelector('#detail-preview .detail-container');
+    const movieDetailImg = document.querySelector('.detail-container__main-img');
+    const movieDetailTitle = document.querySelector('.detail-movie-title');
+    const movieDetailGenres = document.querySelector('.titles__categories');
+    const movieDetailSynopsis = document.querySelector('.detail-container__synopsis');
+    const movieDetailData = document.querySelector('.movie-data__list');
+
+    console.log(data)
+    console.log(typeof data.vote_average)
+
+    movieDetailImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${data.poster_path}`;
+    movieDetailTitle.innerHTML = data.title;
+    data.genres.forEach((genre) => { 
+        const li = document.createElement('li');
+        li.textContent = `${genre.name}`;
+        movieDetailGenres.appendChild(li);
+    })
+    movieDetailSynopsis.innerHTML = data.overview;
+    for(let i = 0; i < 3; i++) {
+        const li = document.createElement('li');
+        if(i === 0) {
+            li.textContent = `⭐ ${data.vote_average.toFixed(1)}`;
+            movieDetailData.appendChild(li);
+        } else if(i === 1) {
+            const releaseDate = data.release_date.split('-');
+            li.textContent = `${releaseDate[0]}`;
+            movieDetailData.appendChild(li);
+        } else {
+            li.textContent = `${data.runtime}min`;
+            movieDetailData.appendChild(li);
+        }
+    }
 }
 
 // DOM Events
@@ -161,7 +198,7 @@ seeAllTrending.addEventListener('click', (e) => {
 
 arrowButton.forEach(arrow => {
     arrow.addEventListener('click', () => {
-        location.hash = window.history.back();
+        window.history.back();
     })
 })
 

@@ -27,7 +27,7 @@
     <div id="app">
 
         <!--------- Home Page Elements --------->
-        <header id="header" class="header-container">
+        <header id="header-home" class="header-container">
             <h1>Movie Static</h1>
 
             <form id="search-form" class="search-form">
@@ -76,7 +76,7 @@
         </main>
 
         <!--------- Details Page elements --------->
-        <header id="header" class="header-details">
+        <header id="header-details" class="header-details">
             <div class="header-details__container">
                 <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
                 <h3>Detail</h3>
@@ -84,34 +84,31 @@
             </div>
         </header>
 
-        <main id="main-element" class="main-movieDetails">
+        <main id="detail-preview" class="main-movieDetails">
             <section class="detail-container">
-                <img src="https://www.themoviedb.org/t/p/w1280/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg" class="detail-container__main-img">
+                <img class="detail-container__main-img">
                 <div class="detail-container__titles">
-                    <span class="titles__type">SERIES</span>
-                    <h1>The Last Of Us 2</h1>
+                    <span class="titles__type">MOVIE</span>
+                    <h1 class="detail-movie-title"></h1>
                     <ul class="titles__categories">
-                        <li>Action</li>
-                        <li>Romance</li>
-                        <li>Adventure</li>
-                        <li>Horror</li>
+
                     </ul>
                 </div>
                 <p class="detail-container__synopsis">
-                    After a global pandemic destroys civilization, a hardened survivor takes charge of a 14-year-old girl who may be humanity's last hope.
+                    
                 </p>
                 <div class="detail-container__movie-data">
                     <ul class="movie-data__list">
-                        <li>⭐ 8.8</li>
+                        <!-- <li></li>
                         <li>2025</li>
-                        <li>50min</li>
+                        <li>50min</li> -->
                     </ul>
                 </div>
             </section>
         </main>
 
         <!--------- See All Trending --------->
-        <header id="header" class="header-trends">
+        <header id="header-trending" class="header-trends">
             <div class="header-details__container">
                 <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
                 <h3>Trending Now</h3>
@@ -126,7 +123,7 @@
         </main>
 
         <!--------- List of movies by category --------->
-        <header id="header" class="header-category">
+        <header id="header-trends" class="header-category">
             <div class="header-details__container">
                 <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
                 <h3 class="category-title"></h3>
@@ -141,7 +138,7 @@
         </main>
 
         <!--------- Search Page --------->
-        <header id="header" class="header-search">
+        <header id="header-search" class="header-search">
             <div class="header-details__container header-details__container--search-view">
                 <button class="container__return-button"><i class="fa-solid fa-less-than"></i></button>
                 <h2 class="searchPage-title"></h2>
