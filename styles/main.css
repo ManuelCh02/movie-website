@@ -274,18 +274,8 @@ button {
     margin-top: inherit;
 }
 
-<<<<<<< HEAD
-/****** Footer ******/
-footer {
-    margin-top: 48px;
-}
-
-footer span {
-    color: inherit;
-=======
 
 /******* Navigation *******/
 .inactive {
     display: none;
->>>>>>> platzi-fetch
 }

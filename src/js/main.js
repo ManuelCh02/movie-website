@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import { API_KEY } from "../sec.js";
-=======
 import { API_KEY } from "./sec.js";
 
 const api = axios.create({
@@ -254,7 +251,6 @@ arrowButton.forEach(arrow => {
         window.history.back();
     })
 })
->>>>>>> platzi-fetch
 
 const API_CALL = {
     method: 'GET',
