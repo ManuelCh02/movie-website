@@ -73,6 +73,10 @@ function createCategories(categories, container) {
         const movieContainer = document.createElement('div');
         movieContainer.classList.add('gallery-container');
 
+        movieContainer.addEventListener('click', () => {
+            location.hash = `#movie=${category.id}`;
+        })
+
         const movieImg = document.createElement('img');
         movieImg.classList.add('movie-img');
         movieImg.alt = `${category.title}`;
@@ -81,6 +85,71 @@ function createCategories(categories, container) {
         movieContainer.appendChild(movieImg);
         container.appendChild(movieContainer);
     })
+}
+
+function createMovieDetail(data, container) {
+    container.innerHTML = '';
+
+    const movieDetailImg = document.createElement('img');
+    movieDetailImg.classList.add('detail-container__main-img');
+    movieDetailImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${data.poster_path}`;
+    movieDetailImg.alt = `${data.title}`;
+
+    const detailContainer = document.createElement('div');
+    detailContainer.classList.add('detail-container__titles');
+
+    const detailType = document.createElement('span');
+    detailType.classList.add('titles__type');
+    detailType.textContent = 'MOVIE';
+
+    const movieDetailTitle = document.createElement('h2');
+    movieDetailTitle.classList.add('detail-movie-title');
+    movieDetailTitle.textContent = data.title;
+
+    const movieDetailGenres = document.createElement('ul');
+    movieDetailGenres.classList.add('titles__categories');
+
+    data.genres.forEach((genre) => { 
+        const li = document.createElement('li');
+        li.textContent = `${genre.name}`;
+        movieDetailGenres.appendChild(li);
+    })
+
+    detailContainer.appendChild(detailType);
+    detailContainer.appendChild(movieDetailTitle);
+    detailContainer.appendChild(movieDetailGenres);
+
+    const movieDetailSynopsis = document.createElement('p');
+    movieDetailSynopsis.classList.add('detail-container__synopsis');
+    movieDetailSynopsis.textContent = data.overview;
+
+    const detailContainerData = document.createElement('div');
+    detailContainerData.classList.add('detail-container__movie-data');
+
+    const movieDetailData = document.createElement('ul');
+    movieDetailData.classList.add('movie-data__list');
+
+    for(let i = 0; i < 3; i++) {
+        const li = document.createElement('li');
+        if(i === 0) {
+            li.textContent = `⭐ ${data.vote_average.toFixed(1)}`;
+            movieDetailData.appendChild(li);
+        } else if(i === 1) {
+            const releaseDate = data.release_date.split('-');
+            li.textContent = `${releaseDate[0]}`;
+            movieDetailData.appendChild(li);
+        } else {
+            li.textContent = `${data.runtime}min`;
+            movieDetailData.appendChild(li);
+        }
+    }
+
+    detailContainerData.appendChild(movieDetailData);
+
+    container.appendChild(movieDetailImg);
+    container.appendChild(detailContainer);
+    container.appendChild(movieDetailSynopsis);
+    container.appendChild(detailContainerData);
 }
 
 // API Calls
@@ -134,39 +203,20 @@ export async function getTrendingMovies() {
 
 export async function getMovieById(id) {
     const { data } = await api(`movie/${id}`, options);
+
+    const movieDetail = document.querySelector('#detail-preview .detail-container');
+
+    createMovieDetail(data, movieDetail);
+    getRelatedMoviesById(id);
+}
+
+async function getRelatedMoviesById(id) {
+    const { data } = await api(`movie/${id}/similar`, options);
+
+    const movies = data.results;
+    const detailRelatedContainer = document.querySelector('.detail-related-movies .movies-container__gallery');
     
-    // const movieDetail = document.querySelector('#detail-preview .detail-container');
-    const movieDetailImg = document.querySelector('.detail-container__main-img');
-    const movieDetailTitle = document.querySelector('.detail-movie-title');
-    const movieDetailGenres = document.querySelector('.titles__categories');
-    const movieDetailSynopsis = document.querySelector('.detail-container__synopsis');
-    const movieDetailData = document.querySelector('.movie-data__list');
-
-    console.log(data)
-    console.log(typeof data.vote_average)
-
-    movieDetailImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${data.poster_path}`;
-    movieDetailTitle.innerHTML = data.title;
-    data.genres.forEach((genre) => { 
-        const li = document.createElement('li');
-        li.textContent = `${genre.name}`;
-        movieDetailGenres.appendChild(li);
-    })
-    movieDetailSynopsis.innerHTML = data.overview;
-    for(let i = 0; i < 3; i++) {
-        const li = document.createElement('li');
-        if(i === 0) {
-            li.textContent = `⭐ ${data.vote_average.toFixed(1)}`;
-            movieDetailData.appendChild(li);
-        } else if(i === 1) {
-            const releaseDate = data.release_date.split('-');
-            li.textContent = `${releaseDate[0]}`;
-            movieDetailData.appendChild(li);
-        } else {
-            li.textContent = `${data.runtime}min`;
-            movieDetailData.appendChild(li);
-        }
-    }
+    createMovies(movies, detailRelatedContainer);
 }
 
 // DOM Events

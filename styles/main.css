@@ -238,6 +238,15 @@ button {
     font-size: var(--body-text-mobile);
 }
 
+.detail-related-container {
+    margin-top: 24px;
+    padding: 12px;
+}
+
+.detail-related-movies {
+    margin-top: 24px;
+}
+
 /******* Categories Gallery ******/
 .movie-container--category {
     position: relative;
