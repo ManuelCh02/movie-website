@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Here's where the logic of singly linked list data structure will work
 import { homePage } from "./views.js"
 import { movieDetails } from "./views.js"
@@ -9,52 +10,89 @@ import { getMovieDetailContent } from "./main.js"
 import { seeAllPage } from "./main.js"
 import { seeAllNowPlayingPage } from "./main.js"
 import { seeAllUpcomingPage } from "./main.js"
+=======
+import { getTrendingMoviesPreview } from "./main.js";
+import { getCategoriesPreview } from "./main.js";
+import { getMoviesByCategory } from "./main.js";
+import { getMoviesBySearch } from "./main.js";
+import { getTrendingMovies } from "./main.js";
+import { getMovieById } from "./main.js";
+import { sections } from './views.js';
+>>>>>>> platzi-fetch
 
-const appParent = document.getElementById('app');
+// Nodes
+const homePageHeader = document.querySelector('#header-home');
+const homePageMain = document.querySelector('#main-element');
 
-class Node {
-    constructor(value) {
-        this.value = value
-        this.next = null
+const detailPageHeader = document.querySelector('#header-details');
+const detailPageMain = document.querySelector('#detail-preview');
+
+const allTrendingPageHeader = document.querySelector('#header-trending');
+const allTrendingPageMain = document.querySelector('#trends-preview');
+
+const categoryPageHeader = document.querySelector('.header-category');
+const categoryPageMain = document.querySelector('#category-preview');
+
+const searchPageHeader = document.querySelector('#header-search');
+const searchPageMain = document.querySelector('#query-preview');
+
+console.log(categoryPageHeader)
+
+window.addEventListener('DOMContentLoaded', navigator, false);
+window.addEventListener('hashchange', navigator, false);
+
+function navigator() {
+    console.log({ location });
+
+    if (location.hash.startsWith('#trends')) {
+        trendsPage();
+    } else if (location.hash.startsWith('#search=')) {
+        searchPage();
+    } else if (location.hash.startsWith('#movie=')) {
+        movieDetailsPage();
+    } else if (location.hash.startsWith('#category=')) {
+        categoriesPage();
+    } else {
+        homePage();
     }
+    location.hash;
 }
 
-class Stack {
-    constructor() {
-        this.top = null
-        this.bottom = null
-        this.length = 0
-    }
+function homePage() {
+    console.log('HOME!');
 
-    peek() {
-        return this.top
-    }
+    // sections.allHeaders.forEach((header) => {
+    //     if(!header.classList.contains('header-container')) {
+    //         header.classList.add('inactive');
+    //     }
+    // })
 
-    push(value) {
-        const newNode = new Node(value)
-        if(this.length === 0) {
-            this.top = newNode
-            this.bottom = newNode
-        } else {
-            const holdingPointer = this.top
-            this.top = newNode
-            this.top.next = holdingPointer
-        }
+    // sections.allMainElements.forEach((main) => {
+    //     if(!main.classList.contains('main-homePage')) {
+    //         main.classList.add('inactive');
+    //     }
+    // })
 
-        this.length++
-        return this
-    }
+    homePageHeader.classList.remove('inactive');
+    homePageMain.classList.remove('inactive');
 
-    pop() {
-        const pointer = this.top
-        this.top = pointer.next
-        this.length--
-        return this
-    }
+    detailPageHeader.classList.add('inactive');
+    detailPageMain.classList.add('inactive');
+    allTrendingPageHeader.classList.add('inactive');
+    allTrendingPageMain.classList.add('inactive');
+    categoryPageHeader.classList.add('inactive');
+    categoryPageMain.classList.add('inactive');
+    searchPageHeader.classList.add('inactive');
+    searchPageMain.classList.add('inactive');
+
+    getTrendingMoviesPreview();
+    getCategoriesPreview();
 }
 
-const myStack = new Stack();
+function categoriesPage() {
+    console.log('CATEGORIES!');
 
+<<<<<<< HEAD
 async function loadHomePage() {
     const initialLoadingPage = await homePage()
 
@@ -70,11 +108,35 @@ document.body.addEventListener('click', (e) => {
     if(e.target.matches('.container-top__details-btn')) {
         updateAppContent(movieDetails());
     }
+=======
+    categoryPageHeader.classList.remove('inactive');
+    categoryPageMain.classList.remove('inactive');
 
-    if(e.target.matches('.container__return-button') || e.target.matches('.fa-less-than')) {
-        returnAppContent();
-    }
+    homePageHeader.classList.add('inactive');
+    homePageMain.classList.add('inactive');
+    detailPageHeader.classList.add('inactive');
+    detailPageMain.classList.add('inactive');
+    allTrendingPageHeader.classList.add('inactive');
+    allTrendingPageMain.classList.add('inactive');
+    searchPageHeader.classList.add('inactive');
+    searchPageMain.classList.add('inactive');
 
+    const categoryTitle = document.querySelector('.category-title');
+    const [_, categoryData] = location.hash.split('=');
+    const [categoryId, categoryName] = categoryData.split('-');
+    categoryTitle.innerHTML = categoryName;
+
+    getMoviesByCategory(categoryId);
+}
+
+function movieDetailsPage() {
+    console.log('MOVIE!');
+>>>>>>> platzi-fetch
+
+    detailPageHeader.classList.remove('inactive');
+    detailPageMain.classList.remove('inactive');
+
+<<<<<<< HEAD
     if(e.target.matches('.trending-now-see-all')) {
         updateAppContent(seeAllTrending());
         seeAllPage();
@@ -122,4 +184,55 @@ async function appendDetailMovieInStack(movieData) {
     } catch(error) {
         console.error('Error yo: ', error)
     }
+=======
+    homePageHeader.classList.add('inactive');
+    homePageMain.classList.add('inactive');
+    allTrendingPageHeader.classList.add('inactive');
+    allTrendingPageMain.classList.add('inactive');
+    categoryPageHeader.classList.add('inactive');
+    categoryPageMain.classList.add('inactive');
+    searchPageHeader.classList.add('inactive');
+    searchPageMain.classList.add('inactive');
+
+    const [_, movieId] = location.hash.split('=');
+    getMovieById(movieId);
+}
+
+function searchPage() {
+    console.log('SEARCH!');
+
+    searchPageHeader.classList.remove('inactive');
+    searchPageMain.classList.remove('inactive');
+
+    homePageHeader.classList.add('inactive');
+    homePageMain.classList.add('inactive');
+    detailPageHeader.classList.add('inactive');
+    detailPageMain.classList.add('inactive');
+    allTrendingPageHeader.classList.add('inactive');
+    allTrendingPageMain.classList.add('inactive');
+    categoryPageHeader.classList.add('inactive');
+    categoryPageMain.classList.add('inactive');
+
+    const [_, query] = location.hash.split('=');
+    getMoviesBySearch(query);
+}
+
+function trendsPage() {
+    console.log('TRENDS!');
+
+    allTrendingPageHeader.classList.remove('inactive');
+    allTrendingPageMain.classList.remove('inactive');
+
+    homePageHeader.classList.add('inactive');
+    homePageMain.classList.add('inactive');
+    detailPageHeader.classList.add('inactive');
+    detailPageMain.classList.add('inactive');
+    categoryPageHeader.classList.add('inactive');
+    categoryPageMain.classList.add('inactive');
+    searchPageHeader.classList.add('inactive');
+    searchPageMain.classList.add('inactive');
+
+    getTrendingMovies();
+    window.scrollTo(0, 0);
+>>>>>>> platzi-fetch
 }

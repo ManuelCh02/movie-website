@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Here's where we'll render all views dynamically
 import { getMostTrending } from "./main.js";
 import { createTrendingList } from "./main.js";
@@ -187,3 +188,10 @@ export function seeAllUpcoming() {
     return movieUpcoming
 }
 
+=======
+export const sections = {
+    allHeaders: document.querySelectorAll('header'),
+    allMainElements: document.querySelectorAll('#main-element'),
+    homePageDetails: document.querySelector('.header-details'),
+}
+>>>>>>> platzi-fetch

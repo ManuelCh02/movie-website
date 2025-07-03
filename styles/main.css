@@ -59,7 +59,7 @@ body {
     height: 100%;
 }
 
-html, body, main {
+html, body, .main-homePage {
     overflow-x: hidden;
 }
 
@@ -87,13 +87,13 @@ button {
 }
 
 .trending-now,
-.latest-movies,
+.categories,
 .upcoming-movies {
     width: 100%;
 }
 
 .trending-now__title-container,
-.latest-movies__title-container,
+.categories__title-container,
 .upcoming-moves__title-container {
     width: 100%;
     display: flex;
@@ -107,7 +107,7 @@ button {
 }
 
 .trending-now__movies-container, 
-.latest-movies__movies-container,
+.categories__movies-container,
 .upcoming-movies__container {
     width: 100%;
     height: 200px;
@@ -134,10 +134,54 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
+}
+
+.header-search .header-details__container--search-view {
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.container__return-button {
+    grid-column: 1 / 2;
+    grid-row: 2;
+}
+
+.searchPage-title {
+    grid-column: 1 / 4;
+    grid-row: 2 / 1;
+}
+
+.search-form {
+    grid-column: 3 / 3;
+    grid-row: 2 / 3;
+}
+
+.search-form {
+    display: flex;
 }
 
 .search-form--inactive {
     display: none;
+}
+
+.search-form--active {
+    display: inline-block;
+}
+
+.form-input {
+    width: auto;
+    outline: none;
+    padding: 12px;
+    font-size: var(--body-text-mobile);
+    font-family: var(--font-family-text);
+    background: var(--clear-purple);
+    outline: none;
+    border: none;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    color: inherit;
 }
 
 .search-form__button {
@@ -146,6 +190,10 @@ button {
     outline: none;
     border: none;
     border-radius: var(--border-radius);
+}
+
+.search-form_button--active {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .fa-solid {
@@ -190,6 +238,33 @@ button {
     font-size: var(--body-text-mobile);
 }
 
+.detail-related-container {
+    margin-top: 24px;
+    padding: 12px;
+}
+
+.detail-related-movies {
+    margin-top: 24px;
+}
+
+/******* Categories Gallery ******/
+.movie-container--category {
+    position: relative;
+    background: var(--deep-blue);
+    display: flex;
+    align-items: center;
+    width: 133.32px;
+    height: 100%;
+    gap: 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-align: center;
+} 
+
+.movie-container--category h3 {
+    width: 100%;
+}
+
 /****** Movies gallery ultra container ******/
 .main-movies-gallery {
     margin-top: 48px;
@@ -199,6 +274,7 @@ button {
     margin-top: inherit;
 }
 
+<<<<<<< HEAD
 /****** Footer ******/
 footer {
     margin-top: 48px;
@@ -206,4 +282,10 @@ footer {
 
 footer span {
     color: inherit;
+=======
+
+/******* Navigation *******/
+.inactive {
+    display: none;
+>>>>>>> platzi-fetch
 }
