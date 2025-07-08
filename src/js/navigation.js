@@ -4,6 +4,7 @@ import { getMoviesByCategory } from "./main.js";
 import { getMoviesBySearch } from "./main.js";
 import { getTrendingMovies } from "./main.js";
 import { getMovieById } from "./main.js";
+import { getMostTrendingImg } from "./main.js";
 import { sections } from './views.js';
 
 // Nodes
@@ -71,6 +72,7 @@ function homePage() {
     searchPageHeader.classList.add('inactive');
     searchPageMain.classList.add('inactive');
 
+    getMostTrendingImg();
     getTrendingMoviesPreview();
     getCategoriesPreview();
 }
