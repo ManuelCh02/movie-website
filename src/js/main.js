@@ -17,8 +17,35 @@ const options = {
 }
 
 // Utils
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+        if(entry.isIntersecting) {
+            const img = entry.target;
 
-function createMovies(movies, container) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+
+            observer.unobserve(img);
+        }
+    })
+    }, {
+        rootMargin: "30px",
+})
+
+const observerVertical = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+        if(entry.isIntersecting) {
+            const img = entry.target;
+
+            img.src = img.dataset.img;
+            img.removeAttribute('data-img');
+
+            observer.unobserve(img);
+        }
+    })
+})
+
+function createMovies(movies, container, lazy = false) {
     container.innerHTML = '';
 
     movies.forEach(movie => {
@@ -33,7 +60,11 @@ function createMovies(movies, container) {
 
             movieImg.classList.add('movie-img');
             movieImg.alt = `${movie.title}`;
-            movieImg.src= `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`;
+            movieImg.width = 135;
+            movieImg.height = 225;
+            movieImg.src = '';
+
+            lazy ? movieImg.dataset.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`;
 
             movieContainer.appendChild(movieImg);
 
@@ -64,9 +95,16 @@ function createMovies(movies, container) {
             container.appendChild(categoryContainer);
         }
     })
+    
+    if(lazy) {
+        const $images = document.querySelectorAll('[data-src]');
+        $images.forEach((image) => {
+            observer.observe(image);
+        })
+    }
 }
 
-function createCategories(categories, container) {
+function createCategories(categories, container, lazy = false) {
     container.innerHTML = '';
 
     categories.forEach(category => {
@@ -80,10 +118,19 @@ function createCategories(categories, container) {
         const movieImg = document.createElement('img');
         movieImg.classList.add('movie-img');
         movieImg.alt = `${category.title}`;
-        movieImg.src= `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}`;
+        movieImg.width = 150;
+        movieImg.height = 225;
+        movieImg.src = ''
+
+        lazy ? movieImg.dataset.img = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}`;
 
         movieContainer.appendChild(movieImg);
         container.appendChild(movieContainer);
+    })
+
+    const $images = document.querySelectorAll('[data-img]');
+    $images.forEach((image) => {
+        observerVertical.observe(image);
     })
 }
 
@@ -185,7 +232,7 @@ export async function getTrendingMoviesPreview() {
     const movies = data.results;
     const trendingPreviewMoviesContainer = document.querySelector('#trending-preview .trending-now__gallery');
     
-    createMovies(movies, trendingPreviewMoviesContainer);
+    createMovies(movies, trendingPreviewMoviesContainer, true);
 }
 
 export async function getCategoriesPreview() {
@@ -203,7 +250,7 @@ export async function getMoviesByCategory(id) {
     const categories = data.results;
     const categoryPreviewMoviesContainer = document.querySelector('#category-preview .category__gallery');
     
-    createCategories(categories, categoryPreviewMoviesContainer); 
+    createCategories(categories, categoryPreviewMoviesContainer, true); 
 }
 
 export async function getMoviesBySearch(query) {
@@ -215,7 +262,7 @@ export async function getMoviesBySearch(query) {
 
     searchPageTitle.textContent = decodeURIComponent(query);
 
-    createMovies(categories, categoryPreviewMoviesContainer); 
+    createMovies(categories, categoryPreviewMoviesContainer, true); 
 }
 
 export async function getTrendingMovies() {
@@ -224,7 +271,7 @@ export async function getTrendingMovies() {
     const movies = data.results;
     const trendsMovieContainer = document.querySelector('#trends-preview .trends__gallery');
     
-    createMovies(movies, trendsMovieContainer);
+    createMovies(movies, trendsMovieContainer, true);
 }
 
 export async function getMovieById(id) {
@@ -242,7 +289,7 @@ async function getRelatedMoviesById(id) {
     const movies = data.results;
     const detailRelatedContainer = document.querySelector('.detail-related-movies .movies-container__gallery');
     
-    createMovies(movies, detailRelatedContainer);
+    createMovies(movies, detailRelatedContainer, true);
 }
 
 // DOM Events

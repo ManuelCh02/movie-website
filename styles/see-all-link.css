@@ -95,6 +95,6 @@ button {
 }
 
 .gallery-container img {
-    width: 150px;
+    /* width: 150px; */
     border-radius: var(--border-radius);
 }

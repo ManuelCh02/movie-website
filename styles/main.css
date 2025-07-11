@@ -83,7 +83,12 @@ button {
 }
 
 .movie-img {
+    aspect-ratio: 2 /3;
     cursor: pointer;
+    border-radius: var(--border-radius);
+    height: auto;
+    object-fit: cover;
+    vertical-align: top;
 }
 
 .trending-now,

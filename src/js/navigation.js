@@ -75,6 +75,7 @@ function homePage() {
     getMostTrendingImg();
     getTrendingMoviesPreview();
     getCategoriesPreview();
+    window.scrollTo(0, 0);
 }
 
 function categoriesPage() {
@@ -98,6 +99,7 @@ function categoriesPage() {
     categoryTitle.innerHTML = categoryName;
 
     getMoviesByCategory(categoryId);
+    window.scrollTo(0, 0);
 }
 
 function movieDetailsPage() {
@@ -117,6 +119,7 @@ function movieDetailsPage() {
 
     const [_, movieId] = location.hash.split('=');
     getMovieById(movieId);
+    window.scrollTo(0, 0);
 }
 
 function searchPage() {
@@ -136,6 +139,7 @@ function searchPage() {
 
     const [_, query] = location.hash.split('=');
     getMoviesBySearch(query);
+    window.scrollTo(0, 0);
 }
 
 function trendsPage() {
