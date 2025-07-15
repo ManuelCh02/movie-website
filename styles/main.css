@@ -83,6 +83,7 @@ button {
 }
 
 .movie-img {
+    min-height: 175px;
     aspect-ratio: 2 /3;
     cursor: pointer;
     border-radius: var(--border-radius);
@@ -395,4 +396,13 @@ button {
     50% {
         opacity: 0%;
     }
+}
+
+/** Errors **/
+.movie-not-loaded {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--clear-purple);
+    text-align: center;
 }

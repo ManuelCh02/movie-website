@@ -65,7 +65,11 @@ function createMovies(movies, container, lazy = false) {
             movieImg.src = '';
 
             lazy ? movieImg.dataset.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`;
-
+            
+            movieImg.addEventListener('error', () => {
+                movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
+            })
+            
             movieContainer.appendChild(movieImg);
 
             if (container.classList.contains('trending-now__gallery')) {
