@@ -1,5 +1,8 @@
 import { API_KEY } from "./sec.js";
 
+let page = 1;
+let maxPage;
+
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {
@@ -29,7 +32,7 @@ const observer = new IntersectionObserver((entries, observer) => {
         }
     })
     }, {
-        rootMargin: "30px",
+        rootMargin: "50px",
 })
 
 const observerVertical = new IntersectionObserver((entries, observer) => {
@@ -45,8 +48,10 @@ const observerVertical = new IntersectionObserver((entries, observer) => {
     })
 })
 
-function createMovies(movies, container, lazy = false) {
-    container.innerHTML = '';
+function createMovies(movies, container, { lazy = false, clean = true } = {}) {
+    if(clean) {
+        container.innerHTML = '';
+    }
 
     movies.forEach(movie => {
         if(!container.classList.contains('categories-gallery')) {
@@ -108,8 +113,10 @@ function createMovies(movies, container, lazy = false) {
     }
 }
 
-function createCategories(categories, container, lazy = false) {
-    container.innerHTML = '';
+function createCategories(categories, container, { lazy = false, clean = true } = {}) {
+    if(clean) {
+        container.innerHTML = '';
+    }
 
     categories.forEach(category => {
         const movieContainer = document.createElement('div');
@@ -127,6 +134,10 @@ function createCategories(categories, container, lazy = false) {
         movieImg.src = ''
 
         lazy ? movieImg.dataset.img = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}`;
+
+        movieImg.addEventListener('error', () => {
+            movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
+        })
 
         movieContainer.appendChild(movieImg);
         container.appendChild(movieContainer);
@@ -236,7 +247,7 @@ export async function getTrendingMoviesPreview() {
     const movies = data.results;
     const trendingPreviewMoviesContainer = document.querySelector('#trending-preview .trending-now__gallery');
     
-    createMovies(movies, trendingPreviewMoviesContainer, true);
+    createMovies(movies, trendingPreviewMoviesContainer, { lazy: true, clean: true });
 }
 
 export async function getCategoriesPreview() {
@@ -245,7 +256,7 @@ export async function getCategoriesPreview() {
     const categories = data.genres;
     const previewCategoriesContainer = document.querySelector('#categories-preview .categories-gallery');
 
-    createMovies(categories, previewCategoriesContainer);
+    createMovies(categories, previewCategoriesContainer, { lazy: true, clean: true });
 }
 
 export async function getMoviesByCategory(id) {
@@ -253,6 +264,7 @@ export async function getMoviesByCategory(id) {
     
     const categories = data.results;
     const categoryPreviewMoviesContainer = document.querySelector('#category-preview .category__gallery');
+    maxPage = data.total_pages;
     
     createCategories(categories, categoryPreviewMoviesContainer, true); 
 }
@@ -263,10 +275,11 @@ export async function getMoviesBySearch(query) {
     const categories = data.results;
     const categoryPreviewMoviesContainer = document.querySelector('#query-preview .query__gallery');
     const searchPageTitle = document.querySelector('.header-search .searchPage-title');
+    maxPage = data.total_pages;
 
     searchPageTitle.textContent = decodeURIComponent(query);
 
-    createMovies(categories, categoryPreviewMoviesContainer, true); 
+    createMovies(categories, categoryPreviewMoviesContainer, { lazy: true, clean: true }); 
 }
 
 export async function getTrendingMovies() {
@@ -275,7 +288,7 @@ export async function getTrendingMovies() {
     const movies = data.results;
     const trendsMovieContainer = document.querySelector('#trends-preview .trends__gallery');
     
-    createMovies(movies, trendsMovieContainer, true);
+    createMovies(movies, trendsMovieContainer, { lazy: true, clean: true });
 }
 
 export async function getMovieById(id) {
@@ -295,6 +308,62 @@ async function getRelatedMoviesById(id) {
     
     createMovies(movies, detailRelatedContainer, true);
 }
+
+export async function getPaginatedTrendingMovies() {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+
+    const pageIsNotMax = page < maxPage;
+
+    if(scrollIsBottom && pageIsNotMax) {
+        page++
+
+        const { data } = await api(`trending/movie/day?page=${page}`, options);
+        const movies = data.results;
+        const trendsMovieContainer = document.querySelector('#trends-preview .trends__gallery');
+    
+        createMovies(movies, trendsMovieContainer, { lazy: true, clean: false });
+    }
+}
+
+export function getPaginatedSearchedMovies(query) {
+    return async function () {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+
+        const pageIsNotMax = page < maxPage;
+
+        if(scrollIsBottom && pageIsNotMax) {
+            page++
+
+            const { data } = await api(`search/movie?query=${query}&page=${page}`, options);
+            const movies = data.results;
+            const categoryPreviewMoviesContainer = document.querySelector('#query-preview .query__gallery');
+    
+            createMovies(movies, categoryPreviewMoviesContainer, { lazy: true, clean: false });
+        }
+    }
+}
+
+export function getPaginatedCategoryMovies(id) {
+    return async function () {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+
+        const pageIsNotMax = page < maxPage;
+
+        if(scrollIsBottom && pageIsNotMax) {
+            page++
+
+            const { data } = await api(`discover/movie?with_genres=${id}&page=${page}`, options);
+            const movies = data.results;
+            const categoryPreviewMoviesContainer = document.querySelector('#category-preview .category__gallery');
+    
+            createCategories(movies, categoryPreviewMoviesContainer, { lazy: true, clean: false });
+        }
+    }
+}
+
 
 // DOM Events
 const formButton = document.querySelector('.search-form__button');

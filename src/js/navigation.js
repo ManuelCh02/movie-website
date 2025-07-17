@@ -5,7 +5,11 @@ import { getMoviesBySearch } from "./main.js";
 import { getTrendingMovies } from "./main.js";
 import { getMovieById } from "./main.js";
 import { getMostTrendingImg } from "./main.js";
-import { sections } from './views.js';
+import { getPaginatedTrendingMovies } from "./main.js";
+import { getPaginatedSearchedMovies } from "./main.js";
+import { getPaginatedCategoryMovies } from "./main.js";
+
+let infiniteScroll;
 
 // Nodes
 const homePageHeader = document.querySelector('#header-home');
@@ -27,9 +31,16 @@ console.log(categoryPageHeader)
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
+window.addEventListener('scroll', infiniteScroll, false);
+
 
 function navigator() {
     console.log({ location });
+
+    if(infiniteScroll) {
+        window.removeEventListener('scroll', infiniteScroll, { passive: false });
+        infiniteScroll = undefined;
+    }
 
     if (location.hash.startsWith('#trends')) {
         trendsPage();
@@ -43,6 +54,10 @@ function navigator() {
         homePage();
     }
     location.hash;
+
+    if(infiniteScroll) {
+        window.addEventListener('scroll', infiniteScroll, { passive: false });
+    }
 }
 
 function homePage() {
@@ -100,6 +115,7 @@ function categoriesPage() {
 
     getMoviesByCategory(categoryId);
     window.scrollTo(0, 0);
+    infiniteScroll = getPaginatedCategoryMovies(categoryId);
 }
 
 function movieDetailsPage() {
@@ -140,6 +156,8 @@ function searchPage() {
     const [_, query] = location.hash.split('=');
     getMoviesBySearch(query);
     window.scrollTo(0, 0);
+
+    infiniteScroll = getPaginatedSearchedMovies(query);
 }
 
 function trendsPage() {
@@ -159,4 +177,5 @@ function trendsPage() {
 
     getTrendingMovies();
     window.scrollTo(0, 0);
+    infiniteScroll = getPaginatedTrendingMovies;
 }
