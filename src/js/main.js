@@ -59,7 +59,7 @@ function createMovies(movies, container, { lazy = false, clean = true } = {}) {
             const movieImg = document.createElement('img');
             movieContainer.classList.add('gallery-container');
 
-            movieContainer.addEventListener('click', () => {
+            movieImg.addEventListener('click', () => {
                 location.hash = `#movie=${movie.id}`;
             })
 
@@ -74,6 +74,15 @@ function createMovies(movies, container, { lazy = false, clean = true } = {}) {
             movieImg.addEventListener('error', () => {
                 movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
             })
+
+            const favoriteBtn = document.createElement('button');
+            favoriteBtn.classList.add('favoriteBtn');
+            favoriteBtn.innerHTML = `<i class="fa-regular fa-star"></i>`;
+            movieContainer.appendChild(favoriteBtn);
+
+            favoriteBtn.addEventListener('click', () => {
+                favoriteBtn.classList.toggle('favoriteBtn--active');
+            });
             
             movieContainer.appendChild(movieImg);
 
