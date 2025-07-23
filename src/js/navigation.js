@@ -8,6 +8,7 @@ import { getMostTrendingImg } from "./main.js";
 import { getPaginatedTrendingMovies } from "./main.js";
 import { getPaginatedSearchedMovies } from "./main.js";
 import { getPaginatedCategoryMovies } from "./main.js";
+import { getFavoriteMovies } from "./main.js";
 
 let infiniteScroll;
 
@@ -90,6 +91,7 @@ function homePage() {
     getMostTrendingImg();
     getTrendingMoviesPreview();
     getCategoriesPreview();
+    getFavoriteMovies();
     window.scrollTo(0, 0);
 }
 

@@ -3,6 +3,8 @@ import { API_KEY } from "./sec.js";
 let page = 1;
 let maxPage;
 
+// Data
+
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {
@@ -17,6 +19,33 @@ const options = {
         accept: 'application/json',
         Authorization: `Bearer ${API_KEY}`,
     }
+}
+
+function favoriteMovieList() {
+    const item = JSON.parse(localStorage.getItem('favorite_movies'));
+    let movies;
+
+    if(item) {
+        movies = item;
+    } else {
+        movies = {}
+    }
+
+    return movies;
+}
+
+function favoriteMovie(movie) {
+    const favoriteMovies = favoriteMovieList();
+
+    if(favoriteMovies[movie.id]) {
+        favoriteMovies[movie.id] = undefined;
+
+        //remove
+    } else {
+        favoriteMovies[movie.id] = movie;
+    }
+
+    localStorage.setItem('favorite_movies', JSON.stringify(favoriteMovies));
 }
 
 // Utils
@@ -80,8 +109,12 @@ function createMovies(movies, container, { lazy = false, clean = true } = {}) {
             favoriteBtn.innerHTML = `<i class="fa-regular fa-star"></i>`;
             movieContainer.appendChild(favoriteBtn);
 
+            favoriteMovieList()[movie.id] && favoriteBtn.classList.add('favoriteBtn--active');
+
             favoriteBtn.addEventListener('click', () => {
                 favoriteBtn.classList.toggle('favoriteBtn--active');
+                favoriteMovie(movie);
+                getFavoriteMovies();
             });
             
             movieContainer.appendChild(movieImg);
@@ -140,13 +173,27 @@ function createCategories(categories, container, { lazy = false, clean = true } 
         movieImg.alt = `${category.title}`;
         movieImg.width = 150;
         movieImg.height = 225;
-        movieImg.src = ''
+        movieImg.src = '';
 
         lazy ? movieImg.dataset.img = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}`;
 
         movieImg.addEventListener('error', () => {
             movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
         })
+
+        const favoriteBtn = document.createElement('button');
+        favoriteBtn.classList.add('favoriteBtn');
+        favoriteBtn.innerHTML = `<i class="fa-regular fa-star"></i>`;
+        movieContainer.appendChild(favoriteBtn);
+
+        favoriteMovieList()[category.id] && favoriteBtn.classList.add('favoriteBtn--active');
+
+        favoriteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            favoriteBtn.classList.toggle('favoriteBtn--active');
+            favoriteMovie(category);
+            getFavoriteMovies();
+        });
 
         movieContainer.appendChild(movieImg);
         container.appendChild(movieContainer);
@@ -371,6 +418,14 @@ export function getPaginatedCategoryMovies(id) {
             createCategories(movies, categoryPreviewMoviesContainer, { lazy: true, clean: false });
         }
     }
+}
+
+export function getFavoriteMovies() {
+    const localStorageMovies = favoriteMovieList();
+    const moviesArray = Object.values(localStorageMovies);
+    const favoritePreviewMoviesContainer = document.querySelector('#liked-preview .liked__gallery');
+
+    createMovies(moviesArray, favoritePreviewMoviesContainer, { lazy: true, clean: true });
 }
 
 

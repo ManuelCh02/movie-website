@@ -280,7 +280,8 @@ button {
     margin-top: inherit;
 }
 
-.movie-container {
+.movie-container, 
+.gallery-container {
     position: relative;
 }
 
@@ -310,6 +311,12 @@ button {
         color: #ffd27d;
         opacity: 1;
     }
+}
+
+
+/******* Footer *******/
+footer {
+    margin-top: 24px;
 }
 
 
