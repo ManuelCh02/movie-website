@@ -5,9 +5,7 @@
   "main": "index.html",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx http-server . -p 3000 -o",
-    "start": "npx http-server . -p 3000"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
