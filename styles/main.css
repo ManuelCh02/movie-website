@@ -839,7 +839,7 @@ footer {
     .liked__movies-container {
         height: 320px;
     }
-=======
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1286,5 +1286,4 @@ footer {
     height: 100%;
     background: var(--clear-purple);
     text-align: center;
->>>>>>> parent of 4868971 (Responsive for tablets and desktop helped with AI)
 }
