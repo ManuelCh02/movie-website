@@ -54,6 +54,13 @@ body {
     overflow-x: hidden;
 }
 
+/* Responsive container */
+.container {
+    width: 100%;
+    max-width: 120ch;
+    margin: 0 auto;
+}
+
 #app {
     width: 100%;
     height: 100%;
@@ -144,15 +151,20 @@ button {
 }
 
 .header-search .header-details__container--search-view {
-    height: 300px;
+    height: auto;
+    min-height: 120px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+    align-items: center;
 }
 
 .container__return-button {
     grid-column: 1 / 2;
     grid-row: 2;
+    padding: 8px 12px;
+    font-size: 14px;
 }
 
 .searchPage-title {
@@ -216,18 +228,98 @@ button {
 
 .trending-top__container-top {
     width: 100%;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
 
 .img-top-trend {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: var(--border-radius);
 }
 
+/* Responsive picture element styling */
+.trending-top__container-top picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.trending-top__container-top picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+/* Hero overlay styling */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(8, 13, 36, 0.8) 0%,
+        rgba(8, 13, 36, 0.6) 30%,
+        rgba(8, 13, 36, 0.3) 60%,
+        rgba(8, 13, 36, 0.1) 100%
+    );
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    border-radius: var(--border-radius);
+}
+
+.hero-content {
+    max-width: 50%;
+    color: var(--white);
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-title1);
+    margin-bottom: 16px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-description {
+    font-size: var(--body-text-mobile);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.hero-details-btn {
+    padding: 12px 24px;
+    background: var(--light-purple);
+    outline: none;
+    border: none;
+    color: inherit;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--body-text-mobile);
+    font-weight: var(--font-weight-text2);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-details-btn:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Legacy button styling (kept for compatibility) */
 .container-top__details-btn {
     position: absolute;
     bottom: -10px;
@@ -259,12 +351,13 @@ button {
     background: var(--deep-blue);
     display: flex;
     align-items: center;
-    width: 133.32px;
-    height: 100%;
-    gap: 16px;
+    justify-content: center;
+    width: 150px;
+    height: 200px;
     border-radius: var(--border-radius);
     cursor: pointer;
     text-align: center;
+    flex-shrink: 0;
 } 
 
 .movie-container--category h3 {
@@ -444,4 +537,254 @@ footer {
     height: 100%;
     background: var(--clear-purple);
     text-align: center;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet styles (768px and up) */
+@media (min-width: 768px) {
+    body {
+        font-size: var(--body-text-desktop);
+    }
+    
+    h2 {
+        font-size: var(--page-title-font-desktop);
+    }
+    
+    a {
+        font-size: calc(var(--body-text-desktop) - 2px);
+    }
+    
+    .trending-now__title-container h2,
+    .categories__title-container h2,
+    .liked__title-container h2 {
+        font-size: var(--page-title-font-desktop);
+    }
+    
+    .form-input {
+        font-size: var(--body-text-desktop);
+    }
+    
+    .fa-solid {
+        font-size: var(--body-text-desktop);
+    }
+    
+    .container-top__details-btn {
+        font-size: var(--body-text-desktop);
+    }
+    
+    /* Hero image responsive */
+    .movie-container--loading-top {
+        width: 100%;
+        max-width: 1920px;
+        height: 400px;
+        aspect-ratio: 1920 / 800;
+    }
+    
+    .img-top-trend {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        aspect-ratio: 1920 / 800;
+    }
+    
+    .trending-top__container-top picture img {
+        height: 400px;
+        aspect-ratio: 1920 / 800;
+    }
+    
+    /* Hero overlay responsive for tablet */
+    .hero-overlay {
+        padding: 32px;
+    }
+    
+    .hero-content {
+        max-width: 60%;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-description {
+        font-size: var(--body-text-desktop);
+    }
+    
+    .hero-details-btn {
+        font-size: var(--body-text-desktop);
+    }
+    
+    /* Gallery improvements for tablet */
+    .movies-container__gallery {
+        gap: 24px;
+    }
+    
+    .movie-container--loading {
+        width: 180px;
+        height: 240px;
+    }
+    
+    .movie-container--loading-trending {
+        width: 180px;
+        height: 240px;
+    }
+    
+    /* Category containers responsive sizing */
+    .movie-container--category {
+        width: 180px;
+        height: 240px;
+    }
+}
+
+/* Desktop styles (1024px and up) */
+@media (min-width: 1024px) {
+    body {
+        padding: 40px;
+    }
+    
+    /* Hero image for desktop */
+    .movie-container--loading-top {
+        height: 500px;
+    }
+    
+    .img-top-trend {
+        height: 500px;
+    }
+    
+    .trending-top__container-top picture img {
+        height: 500px;
+    }
+    
+    /* Hero overlay responsive for desktop */
+    .hero-overlay {
+        padding: 48px;
+    }
+    
+    .hero-content {
+        max-width: 50%;
+    }
+    
+    .hero-title {
+        font-size: 3.2rem;
+    }
+    
+    /* Header improvements */
+    .header-container {
+        gap: 32px;
+    }
+    
+    .search-form {
+        min-width: 300px;
+    }
+    
+    .form-input {
+        min-width: 250px;
+    }
+    
+    /* Gallery improvements for desktop */
+    .movies-container__gallery {
+        gap: 32px;
+    }
+    
+    .movie-container--loading {
+        width: 200px;
+        height: 280px;
+    }
+    
+    .movie-container--loading-trending {
+        width: 200px;
+        height: 280px;
+    }
+    
+    /* Category containers responsive sizing */
+    .movie-container--category {
+        width: 200px;
+        height: 280px;
+    }
+    
+    /* Main content spacing */
+    .main-movies-gallery {
+        margin-top: 64px;
+    }
+    
+    .trending-top {
+        margin: 64px 0 0 0;
+    }
+}
+
+/* Large desktop styles (1440px and up) */
+@media (min-width: 1440px) {
+    /* Hero image for large desktop */
+    .movie-container--loading-top {
+        height: 600px;
+    }
+    
+    .img-top-trend {
+        height: 600px;
+    }
+    
+    .trending-top__container-top picture img {
+        height: 600px;
+    }
+    
+    /* Hero overlay responsive for large desktop */
+    .hero-overlay {
+        padding: 64px;
+    }
+    
+    .hero-content {
+        max-width: 45%;
+    }
+    
+    .hero-title {
+        font-size: 3.8rem;
+    }
+    
+    /* Even larger galleries */
+    .movie-container--loading {
+        width: 220px;
+        height: 320px;
+    }
+    
+    .movie-container--loading-trending {
+        width: 220px;
+        height: 320px;
+    }
+    
+    /* Category containers responsive sizing */
+    .movie-container--category {
+        width: 220px;
+        height: 320px;
+    }
+}
+
+/* Extra responsive improvements */
+@media (min-width: 768px) {
+    .trending-now__movies-container, 
+    .categories__movies-container,
+    .liked__movies-container {
+        height: 240px;
+    }
+    
+    /* Ensure galleries respect container width */
+    .gallery {
+        max-width: 120ch;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .trending-now__movies-container, 
+    .categories__movies-container,
+    .liked__movies-container {
+        height: 280px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .trending-now__movies-container, 
+    .categories__movies-container,
+    .liked__movies-container {
+        height: 320px;
+    }
 }

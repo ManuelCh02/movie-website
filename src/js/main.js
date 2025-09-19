@@ -49,6 +49,72 @@ function favoriteMovie(movie) {
 }
 
 // Utils
+// Responsive image utility
+function getResponsiveImageUrl(posterPath, type = 'poster') {
+    const baseUrl = 'https://media.themoviedb.org/t/p/';
+    
+    if (type === 'backdrop') {
+        // For hero images (backdrops), we'll use different sizes based on breakpoints
+        return {
+            mobile: `${baseUrl}w780${posterPath}`,
+            tablet: `${baseUrl}w1280${posterPath}`,
+            desktop: `${baseUrl}w1920${posterPath}`,
+            original: `${baseUrl}original${posterPath}`
+        };
+    } else if (type === 'detail') {
+        // For movie detail images, use high quality poster sizes
+        return {
+            mobile: `${baseUrl}w500${posterPath}`,
+            tablet: `${baseUrl}w780${posterPath}`,
+            desktop: `${baseUrl}w1280${posterPath}`,
+            original: `${baseUrl}original${posterPath}`
+        };
+    } else {
+        // For regular movie posters in galleries
+        return {
+            small: `${baseUrl}w185${posterPath}`,
+            medium: `${baseUrl}w342${posterPath}`,
+            large: `${baseUrl}w500${posterPath}`,
+            xlarge: `${baseUrl}w780${posterPath}`
+        };
+    }
+}
+
+function createResponsivePictureElement(imageUrls, altText, className = '') {
+    const picture = document.createElement('picture');
+    const img = document.createElement('img');
+    
+    // Add sources for different breakpoints
+    const sources = [
+        { media: '(min-width: 1440px)', srcset: imageUrls.desktop || imageUrls.original },
+        { media: '(min-width: 1024px)', srcset: imageUrls.tablet || imageUrls.desktop },
+        { media: '(min-width: 768px)', srcset: imageUrls.tablet || imageUrls.mobile },
+        { media: '(min-width: 480px)', srcset: imageUrls.mobile }
+    ];
+    
+    sources.forEach(source => {
+        if (source.srcset) {
+            const sourceElement = document.createElement('source');
+            sourceElement.media = source.media;
+            sourceElement.srcset = source.srcset;
+            picture.appendChild(sourceElement);
+        }
+    });
+    
+    // Fallback image
+    img.src = imageUrls.mobile || imageUrls.small;
+    img.alt = altText;
+    if (className) img.classList.add(className);
+    
+    // Error handling
+    img.addEventListener('error', () => {
+        img.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png';
+    });
+    
+    picture.appendChild(img);
+    return picture;
+}
+
 const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
         if(entry.isIntersecting) {
@@ -98,7 +164,11 @@ function createMovies(movies, container, { lazy = false, clean = true } = {}) {
             movieImg.height = 225;
             movieImg.src = '';
 
-            lazy ? movieImg.dataset.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`;
+            // Use responsive image URLs for better performance
+            const imageUrls = getResponsiveImageUrl(movie.poster_path, 'poster');
+            const imageUrl = imageUrls.large; // Use large size for regular movie posters
+            
+            lazy ? movieImg.dataset.src = imageUrl : movieImg.src = imageUrl;
             
             movieImg.addEventListener('error', () => {
                 movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
@@ -175,7 +245,11 @@ function createCategories(categories, container, { lazy = false, clean = true } 
         movieImg.height = 225;
         movieImg.src = '';
 
-        lazy ? movieImg.dataset.img = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}` : movieImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${category.poster_path}`;
+        // Use responsive image URLs for better performance
+        const imageUrls = getResponsiveImageUrl(category.poster_path, 'poster');
+        const imageUrl = imageUrls.large; // Use large size for category movie posters
+        
+        lazy ? movieImg.dataset.img = imageUrl : movieImg.src = imageUrl;
 
         movieImg.addEventListener('error', () => {
             movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
@@ -208,10 +282,17 @@ function createCategories(categories, container, { lazy = false, clean = true } 
 function createMovieDetail(data, container) {
     container.innerHTML = '';
 
-    const movieDetailImg = document.createElement('img');
-    movieDetailImg.classList.add('detail-container__main-img');
-    movieDetailImg.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${data.poster_path}`;
-    movieDetailImg.alt = `${data.title}`;
+    // Create responsive image for movie detail with high quality
+    const imageUrls = getResponsiveImageUrl(data.poster_path, 'detail');
+    const pictureElement = createResponsivePictureElement(
+        imageUrls, 
+        data.title, 
+        'detail-container__main-img'
+    );
+
+    // Create content wrapper for desktop layout
+    const contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('detail-content-wrapper');
 
     const detailContainer = document.createElement('div');
     detailContainer.classList.add('detail-container__titles');
@@ -220,7 +301,7 @@ function createMovieDetail(data, container) {
     detailType.classList.add('titles__type');
     detailType.textContent = 'MOVIE';
 
-    const movieDetailTitle = document.createElement('h2');
+    const movieDetailTitle = document.createElement('h1');
     movieDetailTitle.classList.add('detail-movie-title');
     movieDetailTitle.textContent = data.title;
 
@@ -264,10 +345,14 @@ function createMovieDetail(data, container) {
 
     detailContainerData.appendChild(movieDetailData);
 
-    container.appendChild(movieDetailImg);
-    container.appendChild(detailContainer);
-    container.appendChild(movieDetailSynopsis);
-    container.appendChild(detailContainerData);
+    // Add content to wrapper
+    contentWrapper.appendChild(detailContainer);
+    contentWrapper.appendChild(movieDetailSynopsis);
+    contentWrapper.appendChild(detailContainerData);
+
+    // Add image and content to container
+    container.appendChild(pictureElement);
+    container.appendChild(contentWrapper);
 }
 
 // API Calls
@@ -279,22 +364,58 @@ export async function getMostTrendingImg() {
 
     mostTrendingContainer.innerHTML = '';
 
-    const img = document.createElement('img');
-    img.src = `https://media.themoviedb.org/t/p/w440_and_h660_face${movies[0].poster_path}`;
-    img.alt = movies[0].title;
-    img.classList.add('img-top-trend');
+    // Get the first trending movie with backdrop image
+    const trendingMovie = movies[0];
+    
+    // Get responsive image URLs for backdrop
+    const imageUrls = getResponsiveImageUrl(trendingMovie.backdrop_path, 'backdrop');
+    
+    // Create responsive picture element
+    const pictureElement = createResponsivePictureElement(
+        imageUrls, 
+        trendingMovie.title, 
+        'img-top-trend'
+    );
 
+    // Create overlay container
+    const overlayContainer = document.createElement('div');
+    overlayContainer.classList.add('hero-overlay');
+
+    // Create content wrapper
+    const contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('hero-content');
+
+    // Create movie title
+    const movieTitle = document.createElement('h1');
+    movieTitle.classList.add('hero-title');
+    movieTitle.textContent = trendingMovie.title;
+
+    // Create movie description (truncate if too long)
+    const movieDescription = document.createElement('p');
+    movieDescription.classList.add('hero-description');
+    const description = trendingMovie.overview;
+    const truncatedDescription = description.length > 200 ? description.substring(0, 200) + '...' : description;
+    movieDescription.textContent = truncatedDescription;
+
+    // Create details button
     const btn = document.createElement('button');
-    btn.classList.add('container-top__details-btn');
-    btn.textContent = 'Details';
+    btn.classList.add('hero-details-btn');
+    btn.textContent = 'View Details';
 
     btn.addEventListener('click', () => {
-        location.hash = `#movie=${movies[0].id}`;
-        getMovieById(movies[0].id);
-    })
+        location.hash = `#movie=${trendingMovie.id}`;
+        getMovieById(trendingMovie.id);
+    });
 
-    mostTrendingContainer.appendChild(img);
-    mostTrendingContainer.appendChild(btn);
+    // Assemble the overlay
+    contentWrapper.appendChild(movieTitle);
+    contentWrapper.appendChild(movieDescription);
+    contentWrapper.appendChild(btn);
+    overlayContainer.appendChild(contentWrapper);
+
+    // Add everything to container
+    mostTrendingContainer.appendChild(pictureElement);
+    mostTrendingContainer.appendChild(overlayContainer);
 }
 
 export async function getTrendingMoviesPreview() {
@@ -362,7 +483,7 @@ async function getRelatedMoviesById(id) {
     const movies = data.results;
     const detailRelatedContainer = document.querySelector('.detail-related-movies .movies-container__gallery');
     
-    createMovies(movies, detailRelatedContainer, true);
+    createMovies(movies, detailRelatedContainer, { lazy: true, clean: true });
 }
 
 export async function getPaginatedTrendingMovies() {
