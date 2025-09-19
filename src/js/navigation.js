@@ -32,14 +32,14 @@ console.log(categoryPageHeader)
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
-window.addEventListener('scroll', infiniteScroll, false);
+window.addEventListener('scroll', infiniteScroll, { passive: true });
 
 
 function navigator() {
     console.log({ location });
 
     if(infiniteScroll) {
-        window.removeEventListener('scroll', infiniteScroll, { passive: false });
+        window.removeEventListener('scroll', infiniteScroll, { passive: true });
         infiniteScroll = undefined;
     }
 
@@ -57,7 +57,7 @@ function navigator() {
     location.hash;
 
     if(infiniteScroll) {
-        window.addEventListener('scroll', infiniteScroll, { passive: false });
+        window.addEventListener('scroll', infiniteScroll, { passive: true });
     }
 }
 

@@ -413,7 +413,7 @@ export async function getMostTrendingImg() {
     contentWrapper.appendChild(btn);
     overlayContainer.appendChild(contentWrapper);
 
-    // Add everything to container
+    // Add image and overlay to container
     mostTrendingContainer.appendChild(pictureElement);
     mostTrendingContainer.appendChild(overlayContainer);
 }
@@ -487,8 +487,12 @@ async function getRelatedMoviesById(id) {
 }
 
 export async function getPaginatedTrendingMovies() {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+    // Better scroll detection for mobile devices
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 100); // Increased threshold for mobile
 
     const pageIsNotMax = page < maxPage;
 
@@ -505,8 +509,12 @@ export async function getPaginatedTrendingMovies() {
 
 export function getPaginatedSearchedMovies(query) {
     return async function () {
-        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+        // Better scroll detection for mobile devices
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 100); // Increased threshold for mobile
 
         const pageIsNotMax = page < maxPage;
 
@@ -524,8 +532,12 @@ export function getPaginatedSearchedMovies(query) {
 
 export function getPaginatedCategoryMovies(id) {
     return async function () {
-        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+        // Better scroll detection for mobile devices
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 100); // Increased threshold for mobile
 
         const pageIsNotMax = page < maxPage;
 
