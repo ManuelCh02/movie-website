@@ -171,7 +171,7 @@ function createMovies(movies, container, { lazy = false, clean = true } = {}) {
             lazy ? movieImg.dataset.src = imageUrl : movieImg.src = imageUrl;
             
             movieImg.addEventListener('error', () => {
-                movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
+                // movieImg.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png`;
             })
 
             const favoriteBtn = document.createElement('button');
